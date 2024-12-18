@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 120.0
 const JUMP_VELOCITY = -300.0
@@ -23,3 +24,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_left"):
+		animated_sprite_2d.scale.x = -1
+	elif Input.is_action_just_pressed("ui_right"):
+		animated_sprite_2d.scale.x = 1
