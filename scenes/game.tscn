@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://b67c1q7hqaa83"]
+[gd_scene load_steps=15 format=3 uid="uid://b67c1q7hqaa83"]
 
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6g8cl"]
 [ext_resource type="PackedScene" uid="uid://b10w6n622bclv" path="res://scenes/player.tscn" id="1_tdia0"]
 [ext_resource type="Texture2D" uid="uid://b307eh3iup5b5" path="res://assets/sprites/world_tileset.png" id="2_a4etw"]
 [ext_resource type="PackedScene" uid="uid://2gx4n2b8jlx8" path="res://scenes/platform.tscn" id="3_567s6"]
 [ext_resource type="PackedScene" uid="uid://bfxo3t2vabh0o" path="res://scenes/coin.tscn" id="4_2lhw3"]
 [ext_resource type="PackedScene" uid="uid://duvxx6jje6s2x" path="res://scenes/killzone.tscn" id="5_ffx77"]
 [ext_resource type="PackedScene" uid="uid://1ieci65qslcm" path="res://scenes/slime.tscn" id="6_3dm57"]
+[ext_resource type="FontFile" uid="uid://bymgkmashu6x8" path="res://assets/fonts/PixelOperator8.ttf" id="7_8coax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6q57"]
 texture = ExtResource("2_a4etw")
@@ -212,6 +214,10 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_6g8cl")
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 7)
 tile_set = SubResource("TileSet_de221")
@@ -230,6 +236,17 @@ zoom = Vector2(4, 4)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="ScoreUI" type="Label" parent="Player/Camera2D"]
+unique_name_in_owner = true
+offset_left = -138.0
+offset_top = 56.0
+offset_right = 34.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_8coax")
+theme_override_font_sizes/font_size = 8
+text = "0 coins collected"
 
 [node name="Killzone" parent="." instance=ExtResource("5_ffx77")]
 position = Vector2(0, 118)
@@ -276,3 +293,26 @@ autoplay = "move"
 
 [node name="Slime" parent="." instance=ExtResource("6_3dm57")]
 position = Vector2(442, 7)
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label2" type="Label" parent="Labels"]
+offset_left = 443.0
+offset_top = -32.0
+offset_right = 615.0
+offset_bottom = -9.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_8coax")
+theme_override_font_sizes/font_size = 8
+text = "danger!"
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = -135.0
+offset_top = -19.0
+offset_right = 37.0
+offset_bottom = 4.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_8coax")
+theme_override_font_sizes/font_size = 8
+text = "space to jump
+arrows to move"
